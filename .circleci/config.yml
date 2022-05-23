@@ -24,8 +24,10 @@ jobs:
   
 # Orchestrate or schedule a set of jobs
 workflows:
-  default:
-  jobs:
-    print_world:
-      requires: [print_world]
-    print_hello:
+  welcome: 
+    jobs:
+      - welcome/run
+      - print_world
+      -print_hello
+        requires:
+          - print_world
