@@ -29,5 +29,5 @@ workflows:
       - welcome/run
       - print_world
       - print_hello
-        requires:
-          - print_world
+          requires:
+            - print_world
