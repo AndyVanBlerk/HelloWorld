@@ -22,7 +22,9 @@ jobs:
       steps: 
         - checkout
         - run:
-            echo "print hello"
+            name: "echo an env var that is part of our project"
+            command: |
+              echo $Envi_Var_Name
   
 # Orchestrate or schedule a set of jobs
 workflows:
