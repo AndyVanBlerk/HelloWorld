@@ -11,8 +11,8 @@ commands:
    #   to:
    #    type: string
    #   default: ${CIRCLE_WORKFLOW_ID}
-    steps: 
-      -run: echo << parameters.to >> 
+   # steps: 
+   #   -run: echo << parameters.to >> 
 
 defaults: &defaults   ## anchor & aliases
     docker:
