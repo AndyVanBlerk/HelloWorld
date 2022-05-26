@@ -3,7 +3,7 @@ version: 2.1
 commands: 
   print_pipeline_id:
     description: "Prints the Circle workflow ID to screen"
-    Parameters:
+    parameters:
       id:
         type: string
       steps:
