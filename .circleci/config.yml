@@ -37,7 +37,7 @@ jobs:
       - run: cat ~/output.txt
       - print_pipeline_id:
   #        id: << pipeline.id >>
-  #        to: "add different parameter if wanted"   # if this isn't here it'll use ${CIRCLE_WORKFLOW_ID}
+          to: "add different parameter if wanted"   # if this isn't here it'll use ${CIRCLE_WORKFLOW_ID}
 
 workflows:
   my_workflow:
