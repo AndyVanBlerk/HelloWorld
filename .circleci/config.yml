@@ -15,11 +15,11 @@ jobs:
       steps: 
         - checkout
         - run:
-            echo "hello world" > output.txt
+            echo "hello world" > ~/output.txt
         - persist_to_workspace:
-          root: /tmp/workspace
+          root: ~/
           paths: 
-            - /tmp/workspace/testfolder
+            - output.txt
  
   print_OutPut_file:
       docker:
@@ -27,15 +27,15 @@ jobs:
       steps: 
         - checkout
         - attach_workspace: 
-          at: /tmp/workspace/testfolder
+          at: ~/
         - run:
-            name: "Print cato screen output.txt"
+            name: "Print to screen output.txt"
             command: |
-              cat output.txt
+              cat ~/output.txt
 
 # Orchestrate or schedule a set of jobs
 workflows:
-  weUsingWorkSpaces: 
+  UsingWorkSpaces: 
     jobs:
       - save_hello_world_output
       - print_OutPut_file:
