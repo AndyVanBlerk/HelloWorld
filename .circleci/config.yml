@@ -29,9 +29,7 @@ jobs:
         - attach_workspace: 
           at: ~/
         - run:
-            name: "Print to screen output.txt"
-            command: |
-              cat ~/output.txt
+            command: cat ~/output.txt
 
 # Orchestrate or schedule a set of jobs
 workflows:
