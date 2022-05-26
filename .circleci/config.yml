@@ -5,7 +5,7 @@ commands:
     description: "Prints the Circle workflow ID to screen"
     parameters:
       id:
-        type: string
+        type: array
     steps:
       run: echo << parameters.id >>
    #   to:
