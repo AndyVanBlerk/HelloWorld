@@ -7,7 +7,7 @@ jobs:
       docker:
       - image: circleci/node:13.8.0  
       steps: 
-        - checkout
+        - checkout   ## check out is wrong
         - run:
             echo "hello world" > ~/output.txt
         - persist_to_workspace:
@@ -19,11 +19,11 @@ jobs:
       docker:
       - image: circleci/node:13.8.0 # cimg/base:2020.01
       steps: 
-        - checkout
+        - checkout   ## check out is wrong
         - attach_workspace: 
           at: ~/
         - run:
-            command: cat ~/output.txt
+            command: cat ~/output.txt   ### don't use Command! just run!
 
 # Orchestrate or schedule a set of jobs
 workflows:
