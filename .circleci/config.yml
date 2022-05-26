@@ -1,9 +1,13 @@
 version: 2.1
 
-jobs:
-  save_hello_world_output:
+defaults: &defaults
     docker:
       - image: circleci/node:13.8.0
+
+
+jobs:
+  save_hello_world_output:
+    <<: *defaults
     steps:
       - run: echo "hello world" > ~/output.txt
       - persist_to_workspace:
@@ -12,8 +16,7 @@ jobs:
             - output.txt
 
   print_output_file:
-    docker:
-      - image: circleci/node:13.8.0
+    <<: *defaults
     steps:
       - attach_workspace:
           at: ~/
