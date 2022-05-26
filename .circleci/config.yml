@@ -4,9 +4,13 @@ command:
   print_pipeline_id:
     description: "Prints the Circle workflow ID to screen"
     Parameters:
-      to:
+      id:
         type: string
-        default: ${CIRCLE_WORKFLOW_ID}
+      steps:
+        run: echo << parameters.id >>
+   #   to:
+   #    type: string
+   #   default: ${CIRCLE_WORKFLOW_ID}
     steps: 
       -run: echo << parameters.to >> 
 
@@ -32,6 +36,7 @@ jobs:
           at: ~/
       - run: cat ~/output.txt
       - print_pipeline_id:
+          id: << pipeline.id >>
   #        to: "add different parameter if wanted"   # if this isn't here it'll use ${CIRCLE_WORKFLOW_ID}
 
 workflows:
