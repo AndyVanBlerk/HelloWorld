@@ -1,17 +1,17 @@
 version: 2.1
-
+# CommandParameterEnvironment 
+#Commands and anchors used. 
+## On_fail rollback attempt 1
 commands: 
-  print_pipeline_id:
+  returnAFail:
     description: "Prints the Circle workflow ID to screen"
-    parameters:           ## using caps lock = failure!
-      id:
+    parameters:      
+      to:
         type: string
+        default: ${CIRCLE_WORKFLOW_ID}
     steps:
-     - run: echo << parameters.id >>
-     # run: echo << parameters.id >>  ## so this fails!!
-   #   to:
-   #    type: string
-   #   default: ${CIRCLE_WORKFLOW_ID}
+     - run: echo << parameters.to >>    # return 1
+
 
 defaults: &defaults   ## anchor & aliases
     docker:
@@ -19,14 +19,14 @@ defaults: &defaults   ## anchor & aliases
 
 
 jobs:
-  print_output_file:
+  ReturnEnvironmentWorkflowID:
     <<: *defaults
     steps:
-      - print_pipeline_id:
-          id: << pipeline.id >>
-  #        to: "add different parameter if wanted"   # if this isn't here it'll use ${CIRCLE_WORKFLOW_ID}
+      - returnAFail:
+    #      to: << pipeline.id >>
+     
 
 workflows:
-  My_Commands:
+  CommandParameterEnvironment:
     jobs:
-      - print_output_file
+      - ReturnEnvironmentWorkflowID
