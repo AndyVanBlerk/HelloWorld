@@ -9,7 +9,7 @@ commands:
     parameters:
       to:
         type: string
-        default: ${CIRCLE_WORKFLOW_ID}
+        default: someWords #${CIRCLE_WORKFLOW_ID}
     steps: 
       -run: echo << parameters.to >> 
 
