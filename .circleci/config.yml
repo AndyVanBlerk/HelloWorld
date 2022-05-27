@@ -10,7 +10,7 @@ commands:
         type: string
         default: "World"
     steps:
-      - run: echo ${CIRCLE_WORKFLOW_ID} << parameters.to >>  
+      - run:  ${CIRCLE_WORKFLOW_ID} << parameters.to >>  
       # ${CIRCLE_WORKFLOW_ID} << parameters.to >>  # forces error codde status 127
 
 #    description: "Prints the Circle workflow ID to screen"
@@ -40,6 +40,6 @@ jobs:
         
 
 workflows:
-  CommandParameterEnvironment:
+    TestWhenOnFail-Job:
     jobs:
       - TestWhenOnFail
