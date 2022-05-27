@@ -3,22 +3,14 @@ version: 2.1
 #Commands and anchors used. 
 ## On_fail rollback attempt 1
 commands: 
-  sayhello:
-    description: "A very simple command for demonstration purposes"
-    parameters:
+  returnAFail:
+    description: "Prints the Circle workflow ID to screen"
+    parameters:      
       to:
         type: string
-        default: "World"
+        default: "hello world" # ${CIRCLE_WORKFLOW_ID}
     steps:
-      - run: echo Hello << parameters.to >>
-
-#    description: "Prints the Circle workflow ID to screen"
-#    parameters:      
-#      to:
-#        type: string
-#        default: "hello world" # ${CIRCLE_WORKFLOW_ID}
-#    steps:
-#     - run: echo << parameters.to >>    # return 1
+     - run: echo << parameters.to >>    # return 1
 
 
 defaults: &defaults   ## anchor & aliases
@@ -30,7 +22,7 @@ jobs:
   ReturnEnvironmentWorkflowID:
     <<: *defaults
     steps:
-      - sayhello:
+      - returnAFail:
          to: "inputYourPara"
      
 
