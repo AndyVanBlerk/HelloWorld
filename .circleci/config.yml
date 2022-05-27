@@ -31,12 +31,11 @@ jobs:
   TestWhenOnFail:
     <<: *defaults
     steps:
-      - WhenOnFailTest:
-          to: "inputYourPara"
-      - run:
-          name: Upload Failed Tests
-          command: echo "Job has failed"
-          when: on_fail
+    - run: echo "Run 1 echoed"
+    - run:
+        name: Upload Failed Tests
+        command: echo "Run 2 echoed - did it actually fail"
+        when: on_fail
         
 
 workflows:
