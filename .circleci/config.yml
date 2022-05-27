@@ -8,7 +8,7 @@ commands:
     parameters:      
       to:
         type: string
-        default: ${CIRCLE_WORKFLOW_ID}
+        default: "hello world" # ${CIRCLE_WORKFLOW_ID}
     steps:
      - run: echo << parameters.to >>    # return 1
 
@@ -23,7 +23,7 @@ jobs:
     <<: *defaults
     steps:
       - returnAFail:
-    #      to: << pipeline.id >>
+         to: "inputYourPara"
      
 
 workflows:
