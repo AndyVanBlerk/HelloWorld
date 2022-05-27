@@ -1,28 +1,22 @@
 version: 2.1
-# setting up commands that are re-usable & setting up Anchors for default configs like docker
-defaults: &defaults   ## anchor & aliases
-    docker:
-      - image: circleci/node:13.8.0
-commands: 
+
+commands:
   print_pipeline_id:
-    description: "Prints the Circle workflow ID to screen"
     parameters:
-      to:
+      id:
         type: string
-        default: someWords #${CIRCLE_WORKFLOW_ID}
-    steps: 
-      -run: echo << parameters.to >> 
+    steps:
+      - run: echo << parameters.id >>
 
 jobs:
-  print_output_file:
-    <<: *defaults     # alias to anchor
+  JobCallingCmd:
+    docker:
+      - image: circleci/node:13.8.0
     steps:
       - print_pipeline_id:
-  #        id: << pipeline.id >>
-          to: "add different parameter if wanted"   # if this isn't here it'll use ${CIRCLE_WORKFLOW_ID}
+          id: << pipeline.id >>
 
 workflows:
-  ConfigCommands:
+  my_commands:
     jobs:
-      - print_output_file
-
+      - JobCallingCmd
