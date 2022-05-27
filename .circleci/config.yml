@@ -14,21 +14,9 @@ commands:
       -run: echo << parameters.to >> 
 
 jobs:
-  save_hello_world_output:
-    <<: *defaults    # alias to anchor
-    steps:
-      - run: echo "hello world" > ~/output.txt
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - output.txt
-
   print_output_file:
-    <<: *defaults
+    <<: *defaults     # alias to anchor
     steps:
-      - attach_workspace:
-          at: ~/
-      - run: cat ~/output.txt
       - print_pipeline_id:
   #        id: << pipeline.id >>
           to: "add different parameter if wanted"   # if this isn't here it'll use ${CIRCLE_WORKFLOW_ID}
@@ -36,7 +24,5 @@ jobs:
 workflows:
   ConfigCommands:
     jobs:
-      - save_hello_world_output
-      - print_output_file:
-          requires:
-            - save_hello_world_output
+      - print_output_file
+
