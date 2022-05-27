@@ -3,7 +3,7 @@ version: 2.1
 #Commands and anchors used. 
 ## On_fail rollback attempt 1
 commands: 
-  sayhello:
+  WhenOnFailTest:
     description: "A very simple command for demonstration purposes"
     parameters:
       to:
@@ -28,14 +28,18 @@ defaults: &defaults   ## anchor & aliases
 
 
 jobs:
-  ReturnEnvironmentWorkflowID:
+  TestWhenOnFail:
     <<: *defaults
     steps:
-      - sayhello:
-         to: "inputYourPara"
-     
+      - WhenOnFailTest:
+          to: "inputYourPara"
+      - run:
+          name: Upload Failed Tests
+          command: echo "Job has failed"
+          when: on_fail
+        
 
 workflows:
   CommandParameterEnvironment:
     jobs:
-      - ReturnEnvironmentWorkflowID
+      - TestWhenOnFail
