@@ -1,10 +1,4 @@
 version: 2.1
-# using pipeline variables instead of parameter variables. 
-# adding anchor for defaults like docker
-
-defaults: &defaults   ## anchor & aliases
-    docker:
-      - image: circleci/node:13.8.0
 
 commands:
   print_pipeline_id:
@@ -16,7 +10,8 @@ commands:
 
 jobs:
   JobCallingCmd:
-  <<: *defaults
+    docker:
+      - image: circleci/node:13.8.0
     steps:
       - print_pipeline_id:
           id: << pipeline.id >>
