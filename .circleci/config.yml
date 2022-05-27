@@ -16,7 +16,7 @@ commands:
 
 jobs:
   JobCallingCmd:
-  <<: *defaults
+    <<: *defaults
     steps:
       - print_pipeline_id:
           id: << pipeline.id >>
