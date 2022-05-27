@@ -8,8 +8,7 @@ jobs:
       - image: circleci/node:13.8.0  
       steps: 
       #  - checkout   ## check out is wrong
-        - run:
-            echo "hello world" > ~/output.txt
+        - run:  echo "hello world" > ~/output.txt
         - persist_to_workspace:
           root: ~/
           paths: 
@@ -21,7 +20,7 @@ jobs:
       steps: 
     #    - checkout   ## check out is wrong
         - attach_workspace: 
-          at: ~/
+           at: ~/
         - run: cat ~/output.txt 
       #      command: cat ~/output.txt   ### don't use Command! just run!
 
