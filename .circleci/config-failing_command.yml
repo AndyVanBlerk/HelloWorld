@@ -1,9 +1,9 @@
 version: 2.1
 
-command: 
+commands: 
   print_pipeline_id:
     description: "Prints the Circle workflow ID to screen"
-    Parameters:
+    parameters:           ## using caps lock = failure!
       id:
         type: string
       steps:

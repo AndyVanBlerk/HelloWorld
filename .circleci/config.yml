@@ -1,34 +1,46 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-# Use a package of configuration called an orb.
+# setting up commands that are re-usable & setting up Anchors for default configs like docker
+defaults: &defaults   ## anchor & aliases
+    docker:
+      - image: circleci/node:13.8.0
+commands: 
+  print_pipeline_id:
+    description: "Prints the Circle workflow ID to screen"
+    parameters:
+  #    id:
+  #      type: string
+  #  steps:
+  #    run: echo << parameters.id >>
+      to:
+        type: string
+        default: ${CIRCLE_WORKFLOW_ID}
+    steps: 
+      -run: echo << parameters.to >> 
 
-jobs: 
+jobs:
   save_hello_world_output:
-      docker:
-      - image: circleci/node:13.8.0  
-      steps: 
-      #  - checkout   ## check out is wrong
-        - run:  echo "hello world" > ~/output.txt
-        - persist_to_workspace:
-           root: ~/
-           paths: 
+    <<: *defaults    # alias to anchor
+    steps:
+      - run: echo "hello world" > ~/output.txt
+      - persist_to_workspace:
+          root: ~/
+          paths:
             - output.txt
- 
-  print_OutPut_file:
-      docker:
-      - image: circleci/node:13.8.0 # cimg/base:2020.01
-      steps: 
-    #    - checkout   ## check out is wrong
-        - attach_workspace: 
-           at: ~/
-        - run: cat ~/output.txt 
-      #      command: cat ~/output.txt   ### don't use Command! just run!
 
-# Orchestrate or schedule a set of jobs
+  print_output_file:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: cat ~/output.txt
+      - print_pipeline_id:
+  #        id: << pipeline.id >>
+          to: "add different parameter if wanted"   # if this isn't here it'll use ${CIRCLE_WORKFLOW_ID}
+
 workflows:
-  UsingWorkSpaces: 
+  ConfigCommands:
     jobs:
       - save_hello_world_output
-      - print_OutPut_file:
+      - print_output_file:
           requires:
-           - save_hello_world_output
+            - save_hello_world_output
